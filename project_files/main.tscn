@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b74aq41vgfphe" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://et61f6x2blo4" path="res://mod/hand/hand.glb" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://d30440qmgouo6" path="res://player.gd" id="2_5vw27"]
+[ext_resource type="Script" uid="uid://dcmakcalqcv6a" path="res://teleport.gd" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://dwc8jjyj6jf2q" path="res://tex/Grass/Grass_02-256x256.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://4eu1h48bjis2" path="res://tex/Bricks/Bricks_03-256x256.png" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://c3sxeq2w4rmde" path="res://tex/Wood/Wood_06-256x256.png" id="5_7mycd"]
 [ext_resource type="Texture2D" uid="uid://o8g1vv3md3kv" path="res://tex/Tile/Tile_11-256x256.png" id="6_272bh"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5vw27"]
 sky_top_color = Color(0.62323725, 0.72018754, 0.95756847, 1)
@@ -56,6 +60,7 @@ albedo_texture = ExtResource("6_272bh")
 script = ExtResource("1_ig7tw")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1099327092]
+script = ExtResource("2_5vw27")
 
 [node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1658738863]
 tracker = &"left_hand"
@@ -65,9 +70,18 @@ transform = Transform3D(-0.0034693566, 0, 0.009378889, 0, 0.01, 0, -0.009378889,
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1229428254]
 tracker = &"right_hand"
+script = ExtResource("3_272bh")
 
 [node name="hand" parent="XROrigin3D/RightController" unique_id=1635087344 instance=ExtResource("2_1bvp3")]
 transform = Transform3D(-0.0034693566, -8.199285e-10, -0.009378889, 0, -0.01, 8.7422775e-10, -0.009378889, 3.0330077e-10, 0.0034693566, 0, 0, 0)
+
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController" unique_id=584216189]
+target_position = Vector3(0, 0, -10)
+
+[node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=1279932297]
+transform = Transform3D(0.1, 0, 0, 0, 0.05, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_7mycd")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1284353839]
 
@@ -91,7 +105,7 @@ mesh = SubResource("PlaneMesh_4c57u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Ground" unique_id=419930661]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Ground" unique_id=1801266409]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Ground/StaticBody3D" unique_id=1801266409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0057373107, -0.03636823, 0.0010986136)
 shape = SubResource("BoxShape3D_efxa6")
 
@@ -102,11 +116,8 @@ mesh = SubResource("BoxMesh_ycdy4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Kostka" unique_id=1131134906]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka" unique_id=1063407074]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka/StaticBody3D" unique_id=1063407074]
 shape = SubResource("BoxShape3D_4c57u")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level" unique_id=1101600955]
-transform = Transform3D(0.6551524, -0.54314077, 0.52514136, 0.18239607, 0.7882445, 0.58770937, -0.7331487, -0.2892555, 0.615487, 6.6485453, 5.1884203, 5.7333)
 
 [node name="Kostka2" type="MeshInstance3D" parent="Level" unique_id=1000378657]
 transform = Transform3D(0.4009954, 0, -0.36735907, 0, 0.5675892, 0, 0.32955715, 0, 0.44699156, 0, 0.7826315, -1.7552534)
@@ -115,7 +126,8 @@ mesh = SubResource("BoxMesh_ycdy4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Kostka2" unique_id=130743911]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka2" unique_id=1018851569]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka2/StaticBody3D" unique_id=1018851569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -2.9802322e-08, 0, 0.99999994, 0, 0, 0)
 shape = SubResource("BoxShape3D_4c57u")
 
 [node name="Kostka3" type="MeshInstance3D" parent="Level" unique_id=1770411999]
@@ -125,15 +137,20 @@ mesh = SubResource("BoxMesh_ycdy4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Kostka3" unique_id=384923324]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka3" unique_id=1600492480]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka3/StaticBody3D" unique_id=1600492480]
 shape = SubResource("BoxShape3D_4c57u")
 
-[node name="Kula" type="MeshInstance3D" parent="." unique_id=747839792]
+[node name="Kula" type="MeshInstance3D" parent="Level" unique_id=747839792]
 transform = Transform3D(0.12131559, 0, 0.25789055, 0, 0.285, 0, -0.25789055, 0, 0.12131559, -5.1300592, 0, 2.0120595)
 material_override = SubResource("StandardMaterial3D_ycdy4")
 mesh = SubResource("SphereMesh_w48qg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Kula" unique_id=483198938]
+[node name="RigidBody3D" type="RigidBody3D" parent="Level/Kula" unique_id=1949125907]
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kula/RigidBody3D" unique_id=483198938]
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_vivmo")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Kula" unique_id=1949125907]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level" unique_id=1101600955]
+transform = Transform3D(0.6551524, -0.54314077, 0.52514136, 0.18239607, 0.7882445, 0.58770937, -0.7331487, -0.2892555, 0.615487, 6.6485453, 5.1884203, 5.7333)
