@@ -8,8 +8,9 @@ extends XROrigin3D
 func _physics_process(delta: float) -> void:
 	var dir := Vector3.ZERO
 
-	var fwd := -xr_camera.global_transform.basis.z
-	var right := xr_camera.global_transform.basis.x
+	var fwd := xr_camera.global_transform.basis.z; fwd.y = 0.0; fwd = fwd.normalized()
+	var right := xr_camera.global_transform.basis.x; right.y = 0.0; right = right.normalized()
+
 
 	var v: Vector2 = left_ctrl.get_vector2("thumbstick")
 	if v.length() < deadzone:
@@ -21,3 +22,5 @@ func _physics_process(delta: float) -> void:
 
 	if dir.length() > 0.0:
 		global_translate(dir.normalized() * move_speed * delta)
+		
+	

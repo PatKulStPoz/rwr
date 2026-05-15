@@ -15,6 +15,14 @@ run/main_scene="uid://mgp02mkor0at"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[input]
+
+teleport={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
+]
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
