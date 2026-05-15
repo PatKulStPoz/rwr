@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 	if ray.is_colliding():
 		marker.global_transform.origin = ray.get_collision_point()
 		marker.visible = true
-		if Input.is_action_just_pressed("teleport"):
+		if Input.is_action_pressed("teleport"):
 			if lastTeleport + 1000 * 5 < Time.get_ticks_msec():
 				lastTeleport = Time.get_ticks_msec()
 				teleport_now()

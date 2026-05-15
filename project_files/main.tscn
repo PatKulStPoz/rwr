@@ -67,7 +67,6 @@ tracker = &"left_hand"
 
 [node name="hand" parent="XROrigin3D/LeftController" unique_id=1404514678 instance=ExtResource("2_1bvp3")]
 transform = Transform3D(-6.556708e-10, 0, 0.015, 0, 0.015, 0, -0.015, 0, -6.556708e-10, 0, 0, 0)
-top_level = true
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1229428254]
 tracker = &"right_hand"
@@ -83,7 +82,6 @@ mesh = SubResource("CylinderMesh_7mycd")
 
 [node name="hand" parent="XROrigin3D/RightController" unique_id=1097510517 instance=ExtResource("2_1bvp3")]
 transform = Transform3D(-6.556708e-10, -1.3113416e-09, -0.015, 0, -0.015, 1.3113416e-09, -0.015, 5.7320566e-17, 6.556708e-10, 0, 0, 0)
-top_level = true
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1284353839]
 
