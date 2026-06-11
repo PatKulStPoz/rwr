@@ -3,7 +3,6 @@ extends Node3D
 var webxr_interface
 
 func _ready() -> void:
-	get_viewport().use_xr = true
 	$CanvasLayer.visible = false
 	$CanvasLayer/Button.pressed.connect(self._on_button_pressed)
 
