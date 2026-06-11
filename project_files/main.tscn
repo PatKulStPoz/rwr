@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b74aq41vgfphe" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://et61f6x2blo4" path="res://mod/hand/hand.glb" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://d30440qmgouo6" path="res://player.gd" id="2_5vw27"]
-[ext_resource type="Script" uid="uid://dcmakcalqcv6a" path="res://teleport.gd" id="3_272bh"]
+[ext_resource type="Script" uid="uid://dcmakcalqcv6a" path="res://right_controller.gd" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://dwc8jjyj6jf2q" path="res://tex/Grass/Grass_02-256x256.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://4eu1h48bjis2" path="res://tex/Bricks/Bricks_03-256x256.png" id="4_7mycd"]
 [ext_resource type="Texture2D" uid="uid://c3sxeq2w4rmde" path="res://tex/Wood/Wood_06-256x256.png" id="5_7mycd"]

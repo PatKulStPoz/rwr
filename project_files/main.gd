@@ -3,6 +3,7 @@ extends Node3D
 var webxr_interface
 
 func _ready() -> void:
+	get_viewport().use_xr = true
 	$CanvasLayer.visible = false
 	$CanvasLayer/Button.pressed.connect(self._on_button_pressed)
 
@@ -30,6 +31,10 @@ func _ready() -> void:
 
 		$XROrigin3D/LeftController.button_pressed.connect(self._on_left_controller_button_pressed)
 		$XROrigin3D/LeftController.button_released.connect(self._on_left_controller_button_released)
+
+		$XROrigin3D/RightController.button_pressed.connect(self._on_left_controller_button_pressed)
+		$XROrigin3D/RightController.button_released.connect(self._on_left_controller_button_released)
+
 
 func _webxr_session_supported(session_mode: String, supported: bool) -> void:
 	if session_mode == 'immersive-vr':
@@ -96,7 +101,6 @@ func _webxr_on_select(input_source_id: int) -> void:
 
 	var tracker: XRPositionalTracker = webxr_interface.get_input_source_tracker(input_source_id)
 	var xform = tracker.get_pose('default').transform
-	print (xform.origin)
 
 func _webxr_on_select_start(input_source_id: int) -> void:
 	print("Select Start: " + str(input_source_id))
