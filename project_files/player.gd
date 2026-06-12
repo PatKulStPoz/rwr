@@ -3,6 +3,7 @@ extends XROrigin3D
 @export var move_speed: float = 2.5
 @export var deadzone: float = 0.15
 var snapturn_state: Vector2 = Vector2(0, 1)
+var rotation2: float = 0
 @onready var xr_camera: XRCamera3D = $XRCamera3D
 @onready var left_ctrl: XRController3D = $LeftController
 @onready var right_ctrl: XRController3D = $RightController
@@ -20,10 +21,10 @@ func _physics_process(delta: float) -> void:
 
 	dir += fwd * (-v.y) + right * (v.x)
 	
-	dir = dir.normalized()
+	dir = dir.normalized().rotated(Vector3.UP, rotation2)
 
 	if dir.length() > 0.0:
-		translate(dir.normalized() * move_speed * delta)
+		global_translate(dir.normalized() * move_speed * delta)
 		
 	# Snapturn
 	
@@ -35,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	var angle = snapturn_state.angle_to(v2)
 	
 	if abs(angle) > 0.001:
-		rotate(Vector3.UP, snapturn_state.angle_to(v2))
+		rotation2 = (rotation2 + angle) % (2 * PI)
+		rotate_object_local(Vector3.UP, snapturn_state.angle_to(v2))
 	
 	snapturn_state = v2
