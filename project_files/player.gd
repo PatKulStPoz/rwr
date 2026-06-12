@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	dir = dir.normalized()
 
 	if dir.length() > 0.0:
-		global_translate(dir.normalized() * move_speed * delta)
+		translate(dir.normalized() * move_speed * delta)
 		
 	# Snapturn
 	
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		
 	var angle = snapturn_state.angle_to(v2)
 	
-	if abs(angle) != 0:
-		global_rotate(Vector3.UP, snapturn_state.angle_to(v2))
+	if abs(angle) > 0.001:
+		rotate(Vector3.UP, snapturn_state.angle_to(v2))
 	
 	snapturn_state = v2
