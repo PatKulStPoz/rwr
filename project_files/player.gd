@@ -31,8 +31,10 @@ func _physics_process(delta: float) -> void:
 	if v2.length() < 0.5:
 		snapturn_state = Vector2(0, 1)
 		return
+		
+	var angle = snapturn_state.angle_to(v2)
 	
-	if dir.length() > 0.0:
+	if abs(angle) != 0:
 		global_rotate(Vector3.UP, snapturn_state.angle_to(v2))
 	
 	snapturn_state = v2
