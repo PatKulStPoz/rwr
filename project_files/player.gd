@@ -37,14 +37,6 @@ func _physics_process(delta: float) -> void:
 	
 	if abs(angle) > 0.0001:
 		rotation2 = (rotation2 + angle) % (2 * PI)
-		var inv_global_transform : Transform3D = global_transform.inverse()
-		var t1 := Transform3D()
-		var t2 := Transform3D()
-		var rot := Transform3D()
-
-		t1.origin = -$XRCamera3D.transform.origin
-		t2.origin = $XRCamera3D.transform.origin
-		rot = rot.rotated(Vector3.UP, angle)
-		transform = (transform * t2 * rot * t1).orthonormalized()
+		transform.basis.rotated(Vector3.UP, angle)
 	
 	snapturn_state = v2
