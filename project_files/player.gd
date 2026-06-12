@@ -32,11 +32,11 @@ func _physics_process(delta: float) -> void:
 	if v2.length() < 0.5:
 		snapturn_state = Vector2(0, 1)
 		return
-		
+	
 	var angle = snapturn_state.angle_to(v2)
 	
 	if abs(angle) > 0.0001:
 		rotation2 = (rotation2 + angle) % (2 * PI)
-		global_transform.basis = global_transform.basis.rotated(Vector3.UP, angle)
+		global_rotate(Vector3.UP, angle)
 	
 	snapturn_state = v2
