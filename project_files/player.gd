@@ -35,8 +35,8 @@ func _physics_process(delta: float) -> void:
 		
 	var angle = snapturn_state.angle_to(v2)
 	
-	if abs(angle) > 0.001:
+	if abs(angle) > 0.0001:
 		rotation2 = (rotation2 + angle) % (2 * PI)
-		rotate_object_local(Vector3.UP, snapturn_state.angle_to(v2))
+		$XRCamera3D.rotate(Vector3.UP, angle)
 	
 	snapturn_state = v2
