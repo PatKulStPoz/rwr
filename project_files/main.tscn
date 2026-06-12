@@ -154,3 +154,13 @@ shape = SubResource("SphereShape3D_vivmo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level" unique_id=1101600955]
 transform = Transform3D(0.6551524, -0.54314077, 0.52514136, 0.18239607, 0.7882445, 0.58770937, -0.7331487, -0.2892555, 0.615487, 6.6485453, 5.1884203, 5.7333)
+
+[node name="Kostka4" type="MeshInstance3D" parent="Level" unique_id=296633805]
+transform = Transform3D(-0.9762809, 0, -0.2165077, 0.16640218, 0.639761, -0.7503441, 0.13851318, -0.76857394, -0.62458646, -2.6053853, 0, 2.738775)
+material_override = SubResource("StandardMaterial3D_dg77c")
+mesh = SubResource("BoxMesh_ycdy4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/Kostka4" unique_id=1986183489]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Kostka4/StaticBody3D" unique_id=236711644]
+shape = SubResource("BoxShape3D_4c57u")
