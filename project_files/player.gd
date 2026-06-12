@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	dir = dir.normalized().rotated(Vector3.UP, rotation2)
 
 	if dir.length() > 0.0:
-		global_translate(dir.normalized() * move_speed * delta)
+		transform.origin += (dir.normalized() * move_speed * delta)
 		
 	# Snapturn
 	
@@ -37,6 +37,6 @@ func _physics_process(delta: float) -> void:
 	
 	if abs(angle) > 0.0001:
 		rotation2 = (rotation2 + angle) % (2 * PI)
-		$XRCamera3D.rotate(Vector3.UP, angle)
+		transform.rotated_local(Vector3.UP, angle)
 	
 	snapturn_state = v2
